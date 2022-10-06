@@ -1,3 +1,4 @@
+import scala.util.Random
 
 class Question(
   val text: String,
@@ -83,13 +84,15 @@ def askQuestion(question: Question): Unit = {
     println("Correct!")
   }
   else if (answer == "j") {
-    val correctAnswerText = question.answers(question.correctAnswer)
-    val (_, wrongAnswerText) = question.answers
+    val correctAnswer = (question.correctAnswer, question.answers(question.correctAnswer))
+    val wrongAnswer = Random.shuffle(question.answers
       .filter({ case (answer, text) => answer != question.correctAnswer})
-      .head
+    ).head
 
-    println(correctAnswerText)
-    println(wrongAnswerText)
+    val answers: List[(Answer, String)] = List(correctAnswer, wrongAnswer).sortBy({ case (answer, text) => answer.ordinal })
+    for ((answer, text) <- answers) {
+      println(text)
+    }
 
     val answer = Console.in.readLine()
 
