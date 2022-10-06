@@ -1,0 +1,19 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'ch.epfl.scala:gradle-bloop_2.13:1.5.3-28-373a64c9'
+    }
+}
+
+apply plugin: "scala"
+apply plugin: "bloop"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.scala-lang:scala3-library_3:3.2.0"
+}
