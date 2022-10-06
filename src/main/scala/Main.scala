@@ -63,13 +63,19 @@ def main(): Unit = {
     )
   )
 
+  var correctAnswerCount = 0
   for (question <- questions) {
-    askQuestion(question)
+    val result = askQuestion(question)
+    if (result == true) {
+      correctAnswerCount = correctAnswerCount + 1
+    }
   }
+
+  println(s"Number of correctly answered questions: $correctAnswerCount!")
 
 }
 
-def askQuestion(question: Question): Unit = {
+def askQuestion(question: Question): Boolean = {
   println(question.text)
 
   for ((answer, text) <- question.answers) {
@@ -82,6 +88,7 @@ def askQuestion(question: Question): Unit = {
 
   if (question.correctAnswer.matches(answer)) {
     println("Correct!")
+    true
   }
   else if (answer == "j") {
     val correctAnswer = (question.correctAnswer, question.answers(question.correctAnswer))
@@ -98,13 +105,16 @@ def askQuestion(question: Question): Unit = {
 
     if (question.correctAnswer.matches(answer)) {
       println("Correct!")
+      true
     }
     else {
       println("Wrong...")
+      false
     }
   }
   else {
     println("Wrong!")
+    false
   }
 }
 
