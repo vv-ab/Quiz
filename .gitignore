@@ -2,3 +2,4 @@ out/
 .gradle/
 .bloop/
 .idea/
+build/
